@@ -4,13 +4,8 @@ public:
     bool isValid(int n, vector<int> arr, int mid){
         int count = 0;
         for(int i=0;i<arr.size();i++){
-            while(arr[i] > 0){
-                if(arr[i] > mid){
-                    arr[i] -= mid;
-                }
-                else arr[i] = 0;
-                count++;
-            }
+            if(arr[i] % mid == 0) count += arr[i] / mid;
+            else count += arr[i] / mid + 1;
         }
         return count <= n ? true : false;
     }
