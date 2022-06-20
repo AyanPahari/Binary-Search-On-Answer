@@ -1,18 +1,18 @@
 class Solution {
 public:
     
-    int getIndex(vector<int>& nums2, int element, int low, int high){
-        int mid, res = -1;
-        while(low <= high){
-            mid = low + (high - low) / 2;
-            if(nums2[mid] >= element){
-                res = mid;
-                low = mid + 1;
-            }
-            else high = mid - 1;
-        }
-        return res == -1 ? 0 : res;
-    }
+    // int getIndex(vector<int>& nums2, int element, int low, int high){
+    //     int mid, res = -1;
+    //     while(low <= high){
+    //         mid = low + (high - low) / 2;
+    //         if(nums2[mid] >= element){
+    //             res = mid;
+    //             low = mid + 1;
+    //         }
+    //         else high = mid - 1;
+    //     }
+    //     return res == -1 ? 0 : res;
+    // }
     
     int maxDistance(vector<int>& nums1, vector<int>& nums2) {
         // int maxi = 0;
@@ -26,10 +26,21 @@ public:
         // }
         // return maxi;
         
+        // int maxi = 0;
+        // for(int i=0;i<nums1.size();i++){
+        //     int ind = getIndex(nums2, nums1[i], i, nums2.size() - 1);
+        //     maxi = max(maxi, ind - i);
+        // }
+        // return maxi;
+        
         int maxi = 0;
-        for(int i=0;i<nums1.size();i++){
-            int ind = getIndex(nums2, nums1[i], i, nums2.size() - 1);
-            maxi = max(maxi, ind - i);
+        int i=0,j=0;
+        while(i < nums1.size() && j < nums2.size()){
+            if(nums1[i] <= nums2[j]){
+                if(i <= j) maxi = max(maxi, j - i);
+                j++;
+            }
+            else i++;
         }
         return maxi;
     }
