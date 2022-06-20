@@ -26,9 +26,5 @@ public:
         vector<int>res;
         for(int i=0;i<k;i++) res.push_back(arr[i].second);
         return res;
-        // for(int i=0;i<arr.size();i++){
-        //     cout<<arr[i].first<<" "<<arr[i].second<<endl;
-        // }
-        // return {1,1};
     }
 };
