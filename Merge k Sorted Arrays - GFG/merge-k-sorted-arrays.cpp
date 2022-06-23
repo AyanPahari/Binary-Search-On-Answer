@@ -14,23 +14,24 @@ for (int i=0; i < size; i++)
  // } Driver Code Ends
 //User function Template for C++
 
-
+typedef pair<int, pair<int,int>> ppi;
 class Solution
 {
     public:
     //Function to merge k sorted arrays.
     vector<int> mergeKArrays(vector<vector<int>> arr, int K)
     {
-        priority_queue<int, vector<int>, greater<int>>minh;
-        for(int i=0;i<arr.size();i++){
-            for(int j=0;j<arr[0].size();j++){
-                minh.push(arr[i][j]);
-            }
-        }
         vector<int>res;
+        priority_queue<ppi, vector<ppi>, greater<ppi>>minh;
+        for(int i=0;i<arr.size();i++) minh.push({arr[i][0],{i, 0}});
         while(!minh.empty()){
-            res.push_back(minh.top());
+            int val = minh.top().first;
+            int index = minh.top().second.first;
+            int ptr = minh.top().second.second;
+            ptr++;
+            res.push_back(val);
             minh.pop();
+            if(ptr < K) minh.push({arr[index][ptr],{index, ptr}});
         }
         return res;
     }
